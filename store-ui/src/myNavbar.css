@@ -1,0 +1,15 @@
+.searchButton{
+    color: white;
+    background-color: rgb(3, 158, 3);
+}
+.searchButton:hover{
+     background-color: rgb(4, 126, 4);
+}
+.navLinks{
+    color: white;
+    font-weight: bold;
+}
+.navLinks:hover{
+    background-color: green;
+    color: white;
+}

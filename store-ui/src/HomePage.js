@@ -13,6 +13,7 @@ import Spurs from './Product/Spurs.PNG'
 import ManU from './Product/ManU.PNG'
 import Athletico from './Product/AthleticoMadrid.PNG'
 import Chlesea from './Product/Chlesea.PNG'
+import Filter from "./Filter";
 
 function HomePage() {
   const [inventory, setInventory] = useState([
@@ -29,7 +30,6 @@ function HomePage() {
   ])
   return (
     <div >
-        <MyNavbar />
         <Container>
           <Row lg={4} md={3} sm={2} xs={1} className='mt-5'>
             {

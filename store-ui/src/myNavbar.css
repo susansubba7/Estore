@@ -10,6 +10,9 @@
     font-weight: bold;
 }
 .navLinks:hover{
-    background-color: green;
-    color: white;
+    color: gold;
+}
+.signUp{
+    cursor: pointer;
+    text-decoration: none;
 }

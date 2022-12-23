@@ -14,5 +14,13 @@
 }
 .signUp{
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: underline;
+    background: none;
+    border: none;
+}
+.signUp:hover{
+    color: blue;
+}
+.error{
+    color: red;
 }

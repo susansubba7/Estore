@@ -18,9 +18,9 @@ def create_tables():
     db_cursor.execute(
     """
     CREATE TABLE user(
-        username varchar(120),
-        password varchar(120),
-        PRIMARY KEY (username)
+        email varchar(120),
+        password LONGTEXT,
+        PRIMARY KEY (email)
     );
     """)
     conn.commit()
@@ -40,7 +40,7 @@ def create_tables():
 def load_data():
     conn = connect()
     db_cursor = conn.cursor()
-    db_cursor.execute("""INSERT INTO user VALUES('susansubba', 'password1234')""")
+    db_cursor.execute("""INSERT INTO user VALUES('susansubba', '60c63b81f06374346a8b838dd656c79d1843038781f61c47c8b174672552c226d9ebf05ba7cf692fb33ca495f4f424e1e5f76b3e58241ad08c80d243d495268e')""")
     conn.commit()
     db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Real Madrid 22/23 Home Jersey ', 90.99, 1, 'Real_Madrid_Home.png', "Official Adidas Men's Real Madrid home soccer jersey for the 2022-2023 season"])
     db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['FC Barcelona 22/23 Home Jersey ', 90.99, 1, 'Barcelona.png', "Official Nike Men's Fc Barcelona home soccer jersey for the 2022-2023 season"])
@@ -56,12 +56,15 @@ def load_data():
 
 #commits to database with the give sql statement and arguments
 def exec_commit(sql, args={}):
-    conn = connect()
-    db_cursor = conn.cursor()
-    data = db_cursor.execute(sql, args)
-    conn.commit()
-    conn.close()
-    return data
+    try:
+        conn = connect()
+        db_cursor = conn.cursor()
+        data = db_cursor.execute(sql, args)
+        conn.commit()
+        conn.close()
+        return data
+    except mysql.connector.IntegrityError as err:
+        return False
 
 #gets one data from database after executing give sql statement and arguments
 def exec_get_one(sql, args={}):

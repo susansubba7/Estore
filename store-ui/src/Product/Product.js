@@ -4,10 +4,10 @@ import Card from 'react-bootstrap/Card';
 
 
 function ProductComponent(props){
-    const title = props.details.title;
-    const description = props.details.desc;
-    const image = props.details.image
-    
+    const title = props.details[1];
+    const price = props.details[2];
+    const image = props.details[4];
+    const description = props.details[5];
     return(
         <div>
             <Card style={{height:520, width:"100%"}} className='mt-4'>
@@ -15,7 +15,9 @@ function ProductComponent(props){
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{description}</Card.Text>
+                    <Card.Text style={{fontWeight:'bold'}}>${price}</Card.Text>
                 </Card.Body>
+                
                 <Button variant='primary'>Add to Cart</Button>
             </Card>
         </div>

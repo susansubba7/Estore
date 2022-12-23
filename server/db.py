@@ -26,10 +26,12 @@ def create_tables():
     conn.commit()
     db_cursor.execute( """
     CREATE TABLE inventory(
-        id int,
+        id int NOT NULL Auto_INCREMENT,
         name varchar(120),
         price FLOAT(4, 2) ,
         inStock int,
+        imageName varchar(120),
+        description varchar(500),
         PRIMARY KEY (id)
     );""")
     conn.commit()
@@ -40,7 +42,15 @@ def load_data():
     db_cursor = conn.cursor()
     db_cursor.execute("""INSERT INTO user VALUES('susansubba', 'password1234')""")
     conn.commit()
-    db_cursor.execute("""INSERT INTO inventory VALUES(%s, %s, %s, %s)""", [1001, 'iphone', 90.00, 1])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Real Madrid 22/23 Home Jersey ', 90.99, 1, 'Real_Madrid_Home.png', "Official Adidas Men's Real Madrid home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['FC Barcelona 22/23 Home Jersey ', 90.99, 1, 'Barcelona.png', "Official Nike Men's Fc Barcelona home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['PSG 22/23 Home Jersey ', 90.99, 1, 'PSG.png', "Official Nike Men's Paris Saint-Germain F.C. home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Manchester City 22/23 Home Jersey ', 90.99, 1, 'ManCity.png', "Official Puma Men's Manchester City. home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Juventus 22/23 Home Jersey ', 90.99, 1, 'Juventus.png', "Official Adidas Men's Juventus. home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Spurs 22/23 Home Jersey ', 90.99, 1, 'Spurs.png', "Official Nike Men's Spurs. home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Athletico Madrid 22/23 Home Jersey ', 90.99, 1, 'AthleticoMadrid.png', "Official Nike Men's Athletico Madrid. home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Manchester United 22/23 Home Jersey ', 90.99, 1, 'ManU.png', "Official Adidas Men's Manchester City. home soccer jersey for the 2022-2023 season"])
+    db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Chelsea 22/23 Home Jersey ', 90.99, 1, 'Chelsea.png', "Official Nike Men's Chlesea. home soccer jersey for the 2022-2023 season"])
     conn.commit()
     conn.close()
 

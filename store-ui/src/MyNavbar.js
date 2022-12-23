@@ -6,12 +6,21 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Cart from './cart.png'
+import { useNavigate } from 'react-router-dom';
 
-
-function MyNavbar(){
+function MyNavbar(props){
     const [showModal, setShowModal] = useState(false);
-    const viewModal = () => setShowModal(true);
     const hideModal = () => setShowModal(false);
+    const navigate = useNavigate();
+    const userAuth = () => {
+      if(props.cookie === null){
+        setShowModal(true)
+      }
+      else{
+        console.log("here");
+        navigate('/MyAccount');
+      }
+    }
     return (
         <div>
          <Navbar bg="primary" expand="lg" fixed='top'>
@@ -25,7 +34,7 @@ function MyNavbar(){
             navbarScroll
           >
             <Nav.Link href="/" className='navLinks' >Home</Nav.Link>
-            <Nav.Link href="#action2" className='navLinks' onClick={viewModal}>My Account</Nav.Link>
+            <Nav.Link href="" className='navLinks' onClick={userAuth}>My Account</Nav.Link>
             <Nav.Link href="#action3" className='navLinks'> <img alt="cart" src={Cart} width="30" height="30" /> Cart</Nav.Link>
           </Nav>
           <Form className="d-flex">

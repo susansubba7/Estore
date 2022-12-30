@@ -1,0 +1,27 @@
+.checkout{
+    background-color: rgb(221, 169, 39);
+    color: black;
+    font-size: 16px;
+    border-color: rgb(221, 169, 39);
+}
+.checkout:hover{
+    background-color: rgb(172, 125, 9);
+    color: black;
+    border-color: rgb(172, 125, 9);
+}
+.total{
+    position: absolute;
+    justify-content: baseline;
+    margin-top: 5%;
+    margin-left: 80%;
+
+}
+.cart{
+    background-color: rgb(240, 242, 243);
+    min-height: 93.5vh;
+}
+.myButtons{
+    display: flex;
+    justify-content: space-evenly;
+}
+

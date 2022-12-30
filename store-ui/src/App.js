@@ -1,7 +1,8 @@
 import HomePage from "./HomePage";
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import MyNavbar from "./MyNavbar";
-import MyAccount from './UserAccount/MyAccount'
+import MyAccount from './UserAccount/MyAccount';
+import Cart from './Cart';
 
 function App(){
     return(
@@ -11,10 +12,12 @@ function App(){
         // </div>
       
         <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<HomePage/>}></Route> 
-                    <Route path='/MyAccount' element={<MyAccount/>}></Route> 
-                </Routes>
+            <MyNavbar />
+            <Routes>
+                <Route path='/' element={<HomePage/>}></Route> 
+                <Route path='/MyAccount' element={<MyAccount/>}></Route> 
+                <Route path='/Cart' element={<Cart/>}></Route>
+            </Routes>
         </BrowserRouter>
        
     );

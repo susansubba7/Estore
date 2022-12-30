@@ -1,13 +1,29 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
+import { useCookies } from 'react-cookie';
 
 
 function ProductComponent(props){
+    const [cookies, setCookie, removeCookie] = useCookies(['user', 'email']);
     const title = props.details[1];
     const price = props.details[2];
     const image = props.details[4];
     const description = props.details[5];
+    //console.log(props.details[0])
+    const addToCart = ( ()=>{
+        fetch('http://127.0.0.1:5000/home', {
+            method:'POST',
+            body: JSON.stringify({
+                email:cookies.email,
+                id: props.details[0],
+                price: price
+            }),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then(res => {
+            return res.json()
+        })
+    });
     return(
         <div>
             <Card style={{height:520, width:"100%"}} className='mt-4'>
@@ -18,10 +34,31 @@ function ProductComponent(props){
                     <Card.Text style={{fontWeight:'bold'}}>${price}</Card.Text>
                 </Card.Body>
                 
-                <Button variant='primary'>Add to Cart</Button>
+                <Button variant='primary' onClick={addToCart}>Add to Cart</Button>
             </Card>
         </div>
     );
 }
 
 export default ProductComponent;
+
+
+/*
+ <Row style={{border:'none'}}>
+                                    <Col>
+                                    <Card>
+                                         <Card.Img style={{height:"80%", width:"25%"}}  src={product[2]} />
+                                    </Card>
+                                    </Col>
+                                    <Col>
+                                    <Card  style={{height:'100%', width:'100%', border:'none'}} className='flex-fill'>
+                                        <Card.Body>
+                                        
+                                                <Card.Title style={{ marginLeft:'30%'}} variant='top'>{product[0]}</Card.Title>
+                                                <Card.Text style={{fontWeight:'bold',  marginLeft:'40%'}}>${product[1]}</Card.Text>
+                                        </Card.Body>
+                                        <hr></hr>
+                                    </Card>
+                                    </Col>
+                                   </Row>
+                                   */

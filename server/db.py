@@ -10,11 +10,11 @@ def connect():
     )
     return mydb
 
-#creates a user table in a database that called store that already exists in the mySQL server
+#creates a user table in a database called store that already exists in the mySQL server
 def create_tables():
     conn = connect()
     db_cursor = conn.cursor()
-    db_cursor.execute("DROP TABLE IF EXISTS user, inventory;")
+    db_cursor.execute("DROP TABLE IF EXISTS user, inventory, cart, cartTotal;")
     db_cursor.execute(
     """
     CREATE TABLE user(
@@ -33,6 +33,25 @@ def create_tables():
         imageName varchar(120),
         description varchar(500),
         PRIMARY KEY (id)
+    );""")
+    conn.commit()
+    db_cursor.execute("""
+    CREATE TABLE cart(
+        quantity int,
+        id int,
+        email varchar(120),
+        PRIMARY KEY (email, id),
+        FOREIGN KEY (id) REFERENCES inventory(id),
+        FOREIGN KEY (email) REFERENCES user(email)
+       
+    );""")
+    conn.commit()
+    db_cursor.execute("""
+    CREATE TABLE cartTotal(
+        total FLOAT(6, 2),
+        email varchar(120),
+        PRIMARY KEY (email),
+        FOREIGN KEY (email) REFERENCES user(email)
     );""")
     conn.commit()
     conn.close()

@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App.js'
+import App from './App.js';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './myNavbar.css'
-import {CookiesProvider} from 'react-cookie'
+import './myNavbar.css';
+import {CookiesProvider} from 'react-cookie';
+import './Cart.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

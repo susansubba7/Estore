@@ -16,20 +16,22 @@ function MyNavbar(){
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const [cookies, setCookie, removeCookie] = useCookies(['user', 'email']);
     const [showError, setShowError] = useState('');
     const hideModal = () => {setShowError('');setShowModal(false)};
     const [showLogOut, setShowLogOut] = useState(false);
-    const userAuth = () => {
+    function userAuth(navClick){
       if(cookies.user === undefined){
         setShowModal(true)
       }
-      else{
-        console.log("here");
+      else if(navClick === "cart"){
+        navigate('/Cart')
+      }
+      else if(navClick === "account"){
         navigate('/MyAccount');
       }
     }
-    const login = () => {
+    function login () {
       fetch('http://127.0.0.1:5000/login',{
         method: "POST",
         body: JSON.stringify({
@@ -45,9 +47,10 @@ function MyNavbar(){
         return res.json()
       })
       .then((data) => {
-        console.log(data);
         setCookie('user', data, {path:'/'});
+        setCookie('email', email, {path:'/'});
         setShowLogOut(false);
+        setShowModal(false);
         navigate('/MyAccount');
       })
       .catch((error) =>{
@@ -56,7 +59,8 @@ function MyNavbar(){
       })
     }
     const logOut = () => {
-      removeCookie('user')
+      removeCookie('user');
+      removeCookie('email');
       navigate('/');
     }
     const viewSingUp = () =>{
@@ -102,8 +106,8 @@ function MyNavbar(){
             navbarScroll
           >
             <Nav.Link href="/" className='navLinks' >Home</Nav.Link>
-            <Nav.Link href="" className='navLinks' onClick={userAuth}>My Account</Nav.Link>
-            <Nav.Link href="#action3" className='navLinks'> <img alt="cart" src={Cart} width="30" height="30" /> Cart</Nav.Link>
+            <Nav.Link href="" className='navLinks' onClick={()=>{userAuth("account")}}>My Account</Nav.Link>
+            <Nav.Link href="" className='navLinks' onClick={()=>{userAuth("cart")}}> <img alt="cart" src={Cart} width="30" height="30" /> Cart</Nav.Link>
             <Nav.Link href="#" className='navLinks' onClick={logOut} hidden={showLogOut}>LogOut</Nav.Link>
           </Nav>
           <Form className="d-flex">

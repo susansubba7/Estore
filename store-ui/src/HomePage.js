@@ -4,12 +4,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProductComponent from "./Product/Product";
 import { useState, useEffect } from "react";
-import MyNavbar from "./MyNavbar";
+import { useCookies } from 'react-cookie';
 
 
 function HomePage() {
+  const [cookies, setCookie, removeCookie] = useCookies(['user', 'email']);
   const [inventory, setInventory] = useState(null);
-  
+  console.log(cookies.email);
   useEffect(()=>{
       fetch('http://127.0.0.1:5000/home')
       .then(res => {
@@ -21,7 +22,6 @@ function HomePage() {
   }, []);
   return (
     <div >
-      <MyNavbar cookie={null}/>
         {inventory && <Container>
           <Row lg={4} md={3} sm={2} xs={1} className='mt-5'>
             {

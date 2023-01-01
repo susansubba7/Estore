@@ -14,6 +14,7 @@ api.add_resource(Login, '/login')
 api.add_resource(SignUp, '/signUp')
 api.add_resource(getCart, '/cart/<string:param1>')
 api.add_resource(Cart, '/cart')
+api.add_resource(changeEmail, '/settings')
 
 if __name__ == '__main__':
     print("Loading db");

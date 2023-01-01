@@ -24,4 +24,6 @@
     display: flex;
     justify-content: space-evenly;
 }
-
+.filter{
+    margin-top: 5%;
+}

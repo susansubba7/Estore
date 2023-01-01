@@ -4,17 +4,17 @@ import { useCookies } from 'react-cookie';
 
 
 function ProductComponent(props){
-    const [cookies, setCookie, removeCookie] = useCookies(['user', 'email']);
+    const [cookies] = useCookies(['user', 'userid']);
     const title = props.details[1];
     const price = props.details[2];
     const image = props.details[4];
     const description = props.details[5];
-    //console.log(props.details[0])
     const addToCart = ( ()=>{
+        console.log(cookies.userid);
         fetch('http://127.0.0.1:5000/home', {
             method:'POST',
             body: JSON.stringify({
-                email:cookies.email,
+                userid:cookies.userid,
                 id: props.details[0],
                 price: price
             }),

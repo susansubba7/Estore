@@ -16,10 +16,11 @@ function MyNavbar(){
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies(['user', 'email']);
+    const [cookies, setCookie, removeCookie] = useCookies(['user', 'userid', 'email']);
     const [showError, setShowError] = useState('');
     const hideModal = () => {setShowError('');setShowModal(false)};
     const [showLogOut, setShowLogOut] = useState(false);
+    const [searchVal, setSearchVal] = useState(null);
     function userAuth(navClick){
       if(cookies.user === undefined){
         setShowModal(true)
@@ -41,14 +42,17 @@ function MyNavbar(){
         headers: {"Content-type": "application/json; charset=UTF-8"}
       })
       .then(res => {
+        console.log(res)
         if(!res.ok){
           throw Error('Login failed');
         }
         return res.json()
       })
       .then((data) => {
-        setCookie('user', data, {path:'/'});
-        setCookie('email', email, {path:'/'});
+        console.log(data)
+        setCookie('user', data[0], {path:'/'});
+        setCookie('userid', data[1], {path:'/'});
+        setCookie('email', email);
         setShowLogOut(false);
         setShowModal(false);
         navigate('/MyAccount');
@@ -93,6 +97,9 @@ function MyNavbar(){
         setShowError(error.message);
       })
     }
+    const search = () =>{
+
+    }
     return (
         <div>
          <Navbar bg="primary" expand="lg" fixed='top'>
@@ -116,8 +123,9 @@ function MyNavbar(){
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={e => {setSearchVal(e.target.value)}}
             />
-            <Button variant="outline-success" className='searchButton'>Search</Button>
+            <Button variant="outline-success" className='searchButton' onClick={search} value>Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

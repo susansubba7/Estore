@@ -13,11 +13,11 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 function Cart(){
     const[cart, setCart] = useState(null);
-    const [cookies] = useCookies(['user', 'email']);
+    const [cookies] = useCookies(['user', 'userid']);
     const[total, setTotal] = useState(0);
     const[quantity, setQuantity] = useState(1);
     useEffect(()=>{
-        fetch('http://127.0.0.1:5000/cart/' +cookies.email, {headers: {"Content-type": "application/json; charset=UTF-8"}})
+        fetch('http://127.0.0.1:5000/cart/' +cookies.userid, {headers: {"Content-type": "application/json; charset=UTF-8"}})
         .then(res => {
             return res.json()
         })
@@ -34,7 +34,7 @@ function Cart(){
         fetch('http://127.0.0.1:5000/cart', {
             method:'DELETE',
             body: JSON.stringify({
-                email:cookies.email,
+                userid:cookies.userid,
                 id:id,
                 price:price
             }),

@@ -18,9 +18,10 @@ def create_tables():
     db_cursor.execute(
     """
     CREATE TABLE user(
+        userid int NOT NULL Auto_INCREMENT,
         email varchar(120),
         password LONGTEXT,
-        PRIMARY KEY (email)
+        PRIMARY KEY (userid)
     );
     """)
     conn.commit()
@@ -39,19 +40,18 @@ def create_tables():
     CREATE TABLE cart(
         quantity int,
         id int,
-        email varchar(120),
-        PRIMARY KEY (email, id),
+        userid int NOT NULL,
+        PRIMARY KEY (userid, id),
         FOREIGN KEY (id) REFERENCES inventory(id),
-        FOREIGN KEY (email) REFERENCES user(email)
-       
+        FOREIGN KEY (userid) REFERENCES user(userid)
     );""")
     conn.commit()
     db_cursor.execute("""
     CREATE TABLE cartTotal(
         total FLOAT(6, 2),
-        email varchar(120),
-        PRIMARY KEY (email),
-        FOREIGN KEY (email) REFERENCES user(email)
+        userid int NOT NULL,
+        PRIMARY KEY (userid),
+        FOREIGN KEY (userid) REFERENCES user(userid)
     );""")
     conn.commit()
     conn.close()
@@ -59,7 +59,7 @@ def create_tables():
 def load_data():
     conn = connect()
     db_cursor = conn.cursor()
-    db_cursor.execute("""INSERT INTO user VALUES('susansubba', '60c63b81f06374346a8b838dd656c79d1843038781f61c47c8b174672552c226d9ebf05ba7cf692fb33ca495f4f424e1e5f76b3e58241ad08c80d243d495268e')""")
+    db_cursor.execute("""INSERT INTO user(email, password) VALUES('susansubba', '60c63b81f06374346a8b838dd656c79d1843038781f61c47c8b174672552c226d9ebf05ba7cf692fb33ca495f4f424e1e5f76b3e58241ad08c80d243d495268e')""")
     conn.commit()
     db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['Real Madrid 22/23 Home Jersey ', 90.99, 1, 'Real_Madrid_Home.png', "Official Adidas Men's Real Madrid home soccer jersey for the 2022-2023 season"])
     db_cursor.execute("""INSERT INTO inventory(name, price, inStock, imageName, description) VALUES(%s, %s, %s, %s, %s)""", ['FC Barcelona 22/23 Home Jersey ', 90.99, 1, 'Barcelona.png', "Official Nike Men's Fc Barcelona home soccer jersey for the 2022-2023 season"])

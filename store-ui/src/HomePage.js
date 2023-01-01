@@ -5,10 +5,11 @@ import Col from 'react-bootstrap/Col';
 import ProductComponent from "./Product/Product";
 import { useState, useEffect } from "react";
 import { useCookies } from 'react-cookie';
+import Stack from 'react-bootstrap/esm/Stack';
 
 
 function HomePage() {
-  const [cookies, setCookie, removeCookie] = useCookies(['user', 'email']);
+  const [cookies] = useCookies(['user', 'email']);
   const [inventory, setInventory] = useState(null);
   console.log(cookies.email);
   useEffect(()=>{
@@ -22,6 +23,7 @@ function HomePage() {
   }, []);
   return (
     <div >
+     
         {inventory && <Container>
           <Row lg={4} md={3} sm={2} xs={1} className='mt-5'>
             {
@@ -29,10 +31,9 @@ function HomePage() {
                   <Col><ProductComponent details={product}/></Col>
               ))
             }
-            
-          
           </Row>
         </Container>}
+        
      
     </div>
   );

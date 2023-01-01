@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './myNavbar.css';
 import {CookiesProvider} from 'react-cookie';
 import './Cart.css';
-
+import './UserAccount/MyAccount.css';
+import './UserAccount/AccountSetting.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <CookiesProvider>
